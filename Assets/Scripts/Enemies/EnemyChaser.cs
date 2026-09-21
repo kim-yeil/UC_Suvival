@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyChaser : MonoBehaviour
 {
     [SerializeField] private Transform playerTransfomrm;
-    [SerializeField] private float moveSpeed = 2.0f;
+    [SerializeField] private float moveSpeed;
     [SerializeField] private float stopDistance = 0.8f;
 
     private Rigidbody2D body;
@@ -62,5 +62,11 @@ public class EnemyChaser : MonoBehaviour
     public void SetTarget(Transform targetTransform)
     {
         playerTransfomrm = targetTransform;
+    }
+
+    public void SetVelocity(float moveSpeed)
+    {
+        this.moveSpeed = moveSpeed;
+        Debug.Log("¼Óµµ : " + moveSpeed);
     }
 }
