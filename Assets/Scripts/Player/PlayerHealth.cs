@@ -25,7 +25,6 @@ public class PlayerHealth : MonoBehaviour
         if (isInvincible == true) return;
 
         currentHealth -= damageAmount;
-        Debug.Log("HP : " + currentHealth + " / " + maxHealth);
 
         isInvincible = true;
         Invoke("DisableInvincible", 1.0f);
@@ -39,7 +38,6 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         isDead = true;
-        Debug.Log("»ç¸Á!");
         playerAnimator.SetTrigger("Die");
     }
 

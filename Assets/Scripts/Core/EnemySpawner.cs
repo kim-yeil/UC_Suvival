@@ -16,6 +16,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float minVelocity = 1.0f;
     [SerializeField] private float maxVelocity = 3.0f;
 
+    private int spawnCount;
+
     private float spawnTimer;
 
     // Update is called once per frame
@@ -38,14 +40,17 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         // 생성 위치 계산
-        int enemyNum = Random.Range(0, 3);
-        EnemyChaser newEnemy = Instantiate(enemyPrefab[enemyNum], 
-            GetSpawnPosition(), Quaternion.identity);
-
-        if (newEnemy != null)
+        for (int i = 0; i < spawnCount; i++)
         {
-            newEnemy.SetTarget(playerTransform);
-            newEnemy.SetVelocity(Random.Range(minVelocity, maxVelocity));
+            int enemyNum = Random.Range(0, 3);
+            EnemyChaser newEnemy = Instantiate(enemyPrefab[enemyNum],
+                GetSpawnPosition(), Quaternion.identity);
+
+            if (newEnemy != null)
+            {
+                newEnemy.SetTarget(playerTransform);
+                newEnemy.SetVelocity(Random.Range(minVelocity, maxVelocity));
+            }
         }
     }
 
@@ -56,6 +61,16 @@ public class EnemySpawner : MonoBehaviour
         Vector2 playerPosition = playerTransform.position;
 
         return (randomDirection * randomDistance) + playerPosition;
+    }
+
+    public void SetSpawnInterval(float newSpawnInterval)
+    {
+        spawnInterval = newSpawnInterval;
+    }
+
+    public void SetSpawnCount(int spawnCount)
+    {
+        this.spawnCount = spawnCount;
     }
 
     private void OnDrawGizmos()
