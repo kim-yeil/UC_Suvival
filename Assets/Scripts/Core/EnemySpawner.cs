@@ -3,10 +3,19 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+public enum EnemyIndex
+{
+    Normal,
+    Fast,
+    Heavy
+}
+
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private Transform spawnPoint;
     [SerializeField] private EnemyChaser[] enemyPrefab;
+    [SerializeField] private int[] enemyChance = { 65, 25, 10 };
+    [SerializeField] private float[] enemySpeed = { 1.5f, 2.5f, 0.7f };
+
     [SerializeField] private Transform playerTransform;
     [SerializeField] private float spawnInterval = 2.0f;
 
@@ -17,8 +26,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float maxVelocity = 3.0f;
 
     private int spawnCount;
-
     private float spawnTimer;
+    private float spawnedEnemySpeed;
 
     // Update is called once per frame
     void Update()
@@ -42,16 +51,36 @@ public class EnemySpawner : MonoBehaviour
         // 생성 위치 계산
         for (int i = 0; i < spawnCount; i++)
         {
-            int enemyNum = Random.Range(0, 3);
-            EnemyChaser newEnemy = Instantiate(enemyPrefab[enemyNum],
+            EnemyChaser newEnemy = Instantiate(GetEnemyPrefab(),
                 GetSpawnPosition(), Quaternion.identity);
 
             if (newEnemy != null)
             {
                 newEnemy.SetTarget(playerTransform);
-                newEnemy.SetVelocity(Random.Range(minVelocity, maxVelocity));
+                newEnemy.SetVelocity(spawnedEnemySpeed);
             }
         }
+    }
+
+    EnemyChaser GetEnemyPrefab()
+    {
+        int randomValue = Random.Range(0, 100);
+
+        //randomValue가 0 ~ 9 : Heavy / 10 ~ 34 : Fast / 35 ~ 99 : Normal
+        if (randomValue < enemyChance[(int)EnemyIndex.Heavy])
+        {
+            spawnedEnemySpeed = enemySpeed[(int)EnemyIndex.Heavy];
+            return enemyPrefab[(int)EnemyIndex.Heavy];
+        }
+        
+        if (randomValue < enemyChance[(int)EnemyIndex.Heavy] + enemyChance[(int)EnemyIndex.Fast])
+        {
+            spawnedEnemySpeed = enemySpeed[(int)EnemyIndex.Fast];
+            return enemyPrefab[(int)EnemyIndex.Fast];
+        }
+
+        spawnedEnemySpeed = enemySpeed[(int)EnemyIndex.Normal];
+        return enemyPrefab[(int)EnemyIndex.Normal];
     }
 
     Vector2 GetSpawnPosition()

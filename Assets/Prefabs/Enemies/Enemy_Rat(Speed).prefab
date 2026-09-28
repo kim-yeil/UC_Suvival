@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 6359447765743857084}
   - component: {fileID: 5505016821428753948}
   - component: {fileID: 625747233575496910}
-  - component: {fileID: 3250959320225118723}
+  - component: {fileID: -6053043998545511454}
   m_Layer: 6
-  m_Name: Enemy_Crab
+  m_Name: Enemy_Rat(Speed)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2438307069932402953, guid: d846abb0336da004fbf063a0e91aeaea, type: 3}
+  m_Sprite: {fileID: 260878052759509753, guid: 2327dee1e20363b41a2488a631a0a941, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -157,8 +157,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.12, y: -0.48}
-  m_Radius: 0.52
+  m_Offset: {x: 0.04, y: -0.6}
+  m_Radius: 0.4
 --- !u!95 &5505016821428753948
 Animator:
   serializedVersion: 7
@@ -169,7 +169,7 @@ Animator:
   m_GameObject: {fileID: 1954415435069277618}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2db56c8328c9de74489a5c125519f997, type: 2}
+  m_Controller: {fileID: 9100000, guid: e53056160810d454bb5dec40d43918f8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
---- !u!114 &3250959320225118723
+--- !u!114 &-6053043998545511454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

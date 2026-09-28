@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -256,6 +257,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f8d367dea4c3d4fa53c1d43b6caf02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
+  target: {fileID: 1348849372}
+  targetPosition: {x: 0, y: 0, z: 0}
+  followSpeed: 15
+  followPosition: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 0, z: -10}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,11 +619,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1683fad2d3603e7409b987baa313f5f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  spawnPoint: {fileID: 0}
   enemyPrefab:
-  - {fileID: 625747233575496910, guid: 506fe9825e700514ab52965d97509a47, type: 3}
   - {fileID: 625747233575496910, guid: b9beafb703b5a5a48860763b3adf163f, type: 3}
+  - {fileID: 625747233575496910, guid: 506fe9825e700514ab52965d97509a47, type: 3}
   - {fileID: 625747233575496910, guid: 049b3d11cbcf9ec4b9de18c14f01f8f9, type: 3}
+  enemyChance: 41000000190000000a000000
+  enemySpeed:
+  - 1.5
+  - 2.5
+  - 0.5
   playerTransform: {fileID: 1348849372}
   spawnInterval: 2
   minSpawnDistance: 5

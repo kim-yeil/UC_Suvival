@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 625747233575496910}
   - component: {fileID: 1114530589046104092}
   m_Layer: 6
-  m_Name: Enemy_Bat
+  m_Name: Enemy_Bat(Normal)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,4 +213,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6378beff233b3348b74ae0381fe9f9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ContactDamageArea
-  damageAmount: 1
+  damageAmount: 2
