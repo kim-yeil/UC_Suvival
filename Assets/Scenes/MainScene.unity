@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 1348849373}
   - component: {fileID: 1348849374}
   - component: {fileID: 1348849375}
+  - component: {fileID: 1348849376}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -437,8 +438,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.02, y: -0.46}
-  m_Size: {x: 0.6, y: 1.2}
+  m_Offset: {x: 0.01, y: -0.3}
+  m_Size: {x: 0.5, y: 0.9}
   m_Direction: 0
 --- !u!50 &1348849370
 Rigidbody2D:
@@ -590,6 +591,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 10
   currentHealth: 0
+--- !u!114 &1348849376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348849368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8985d61146d23be4e8e2c08eb45d14ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerTargetFinder
+  targetRange: 5
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1462718157
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,8 +647,8 @@ MonoBehaviour:
   - 0.5
   playerTransform: {fileID: 1348849372}
   spawnInterval: 2
-  minSpawnDistance: 5
-  maxSpawnDistance: 8
+  minSpawnDistance: 6
+  maxSpawnDistance: 9
   minVelocity: 1
   maxVelocity: 3
 --- !u!4 &1462718159

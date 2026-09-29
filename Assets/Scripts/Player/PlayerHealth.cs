@@ -27,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= damageAmount;
 
         isInvincible = true;
-        Invoke("DisableInvincible", 1.0f);
+        Invoke(nameof(DisableInvincible), 1.0f);
 
         if (currentHealth <= 0)
         {

@@ -19,8 +19,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private float spawnInterval = 2.0f;
 
-    [SerializeField] private float minSpawnDistance = 5.0f;
-    [SerializeField] private float maxSpawnDistance = 8.0f;
+    [SerializeField] private float minSpawnDistance = 6.0f;
+    [SerializeField] private float maxSpawnDistance = 9.0f;
 
     [SerializeField] private float minVelocity = 1.0f;
     [SerializeField] private float maxVelocity = 3.0f;
