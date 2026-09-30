@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5505016821428753948}
   - component: {fileID: 625747233575496910}
   - component: {fileID: 3250959320225118723}
+  - component: {fileID: 1703592555734051912}
   m_Layer: 6
   m_Name: Enemy_Crab(Heavy)
   m_TagString: Untagged
@@ -214,3 +215,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ContactDamageArea
   damageAmount: 3
+--- !u!114 &1703592555734051912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954415435069277618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64db78cd9c21b24795629df4133cc33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  maxHealth: 3
+  spriteRenderer: {fileID: 0}
+  hitFeedbackInterval: 0.3
+  hitFeedbackTimer: 0
+  hitColor: {r: 0, g: 0, b: 0, a: 1}

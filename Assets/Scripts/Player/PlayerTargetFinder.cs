@@ -57,6 +57,10 @@ public class PlayerTargetFinder : MonoBehaviour
         Debug.DrawLine(transform.position, nearestTarget.position, Color.red);
     }
 
+    /// <summary>
+    /// 가장 가까운 대상의 Transform 정보를 반환하는 함수
+    /// </summary>
+    /// <returns> 가장 가까운 대상의 Transform 정보 </returns>
     public Transform GetNearestTarget()
     {
         return nearestTarget;

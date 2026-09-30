@@ -12,6 +12,8 @@ public class EnemyChaser : MonoBehaviour
     [SerializeField] private float separationWeight = 0.4f;
     [SerializeField] private LayerMask enemyLayer;
 
+    [SerializeField] private EnemyHealth enemyHealth;
+
     private Rigidbody2D body;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
@@ -21,6 +23,7 @@ public class EnemyChaser : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        enemyHealth = GetComponent<EnemyHealth>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -64,7 +67,11 @@ public class EnemyChaser : MonoBehaviour
         Vector2 finalDirection = direction + (separationDirection * separationWeight);
         if (finalDirection != Vector2.zero) finalDirection = finalDirection.normalized;
 
-        body.linearVelocity = finalDirection * moveSpeed;
+        if (enemyHealth.isDead == true)
+        {
+            body.linearVelocity = Vector3.zero;
+        }
+        else body.linearVelocity = finalDirection * moveSpeed;
     }
 
     public void SetTarget(Transform targetTransform)
