@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 1474657476190648044}
   m_Layer: 6
   m_Name: Enemy_Bat(Normal)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -202,6 +202,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  enemyHealth: {fileID: 0}
 --- !u!114 &1114530589046104092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,7 +229,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 3
+  isDead: 0
   spriteRenderer: {fileID: 0}
   hitFeedbackInterval: 0.3
   hitFeedbackTimer: 0
-  hitColor: {r: 0, g: 0, b: 0, a: 1}
+  hitColor: {r: 0, g: 1, b: 0, a: 1}

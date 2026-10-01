@@ -6,6 +6,7 @@ public class PlayerTargetFinder : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
 
     private Transform nearestTarget;
+    private EnemyHealth enemyHealth;
 
     private float targetFindTimer;
     private string targetName;
@@ -35,6 +36,10 @@ public class PlayerTargetFinder : MonoBehaviour
         for (int i = 0; i < targetsInRange.Length; i++)
         {
             Collider2D targetCollider = targetsInRange[i];
+            EnemyHealth targetHealth = targetCollider.GetComponent<EnemyHealth>();
+            if (targetHealth == null) continue;
+            if (targetHealth.isDead == true) continue;
+
             Vector2 playerPosition = transform.position;
             Vector2 targetPosition = targetCollider.transform.position;
 

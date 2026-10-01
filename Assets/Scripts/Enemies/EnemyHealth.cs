@@ -25,7 +25,6 @@ public class EnemyHealth : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         originColor = spriteRenderer.color;
-        animator.SetBool("IsDead", false);
     }
 
     private void Update()
@@ -49,12 +48,12 @@ public class EnemyHealth : MonoBehaviour
         if (isDead == true) return;
 
         currentHealth -= damageAmount;
-        HitFeedback();
         if (currentHealth <= 0)
         {
             // »ç¸Á Ã³¸®
             Die();
         }
+        else HitFeedback();
     }
 
     /// <summary>
@@ -63,7 +62,7 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         isDead = true;
-        animator.SetBool("IsDead", true);
+        animator.SetTrigger("DIE");
     }
 
     public void DeathAnimationEnd()

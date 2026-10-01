@@ -6,8 +6,11 @@ using UnityEngine;
 public class PlayerAutoAttack : MonoBehaviour
 {
     [SerializeField] private PlayerTargetFinder targetFinder;
-    [SerializeField] private int damageAmount = 1;
     [SerializeField] private float attackInterval = 0.7f;
+    [SerializeField] ProjectileMovement projectilePrefab;
+
+    [SerializeField] private Transform projectileSpawnPoint;
+    [SerializeField] private float projectileSpeed = 5.0f;
 
     private float nextAttackTime;
 
@@ -35,11 +38,35 @@ public class PlayerAutoAttack : MonoBehaviour
         Transform target = targetFinder.GetNearestTarget();
         if (target == null) return; // 공격 타겟 유무 확인
 
-        EnemyHealth enemyHealth = target.GetComponent<EnemyHealth>();
-        if (enemyHealth != null) // 적 체력 스크립트 유무 확인
+        bool isProjectileCreated = SpawnProjectile(target);
+        if (isProjectileCreated == false) return;
+
+        nextAttackTime = Time.time + attackInterval;
+    }
+
+    bool SpawnProjectile(Transform target)
+    {
+        if (projectilePrefab == null)
         {
-            enemyHealth.TakeDamage(damageAmount);
-            nextAttackTime = Time.time + attackInterval;
+            Debug.LogWarning("투사체 Prefab 없음!");
+            return false;
         }
+
+        Vector2 startPosition = projectileSpawnPoint.position;
+        Vector2 targetPosition = target.position;
+        Vector2 direction = targetPosition - startPosition;
+
+        if (direction == Vector2.zero) return false; // 타겟과 발사 위치가 동일한 경우
+
+        ProjectileMovement projectileObject = 
+            Instantiate(projectilePrefab, startPosition, Quaternion.LookRotation(Vector3.forward, direction));
+
+        if (projectileObject != null)
+        {
+            projectileObject.Initialized(direction.normalized, projectileSpeed);
+            return true;
+        }
+
+        return false;
     }
 }
