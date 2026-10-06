@@ -12,7 +12,6 @@ public class ContactDamageArea : MonoBehaviour
     {
         PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
         if (playerHealth == null) return;
-
         playerHealth.TakeDamage(damageAmount);
     }
 }

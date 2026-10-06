@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 836390279991871764}
   m_Layer: 0
   m_Name: TestProjectile
-  m_TagString: playerSkills
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,4 +173,4 @@ MonoBehaviour:
   lifeTime: 2
   body: {fileID: 2676242928063908193}
   damageAmount: 1
-  destroyType: 0
+  pierceCount: 3

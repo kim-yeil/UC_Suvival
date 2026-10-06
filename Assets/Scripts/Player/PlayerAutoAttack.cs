@@ -13,15 +13,18 @@ public class PlayerAutoAttack : MonoBehaviour
     [SerializeField] private float projectileSpeed = 5.0f;
 
     private float nextAttackTime;
+    private PlayerHealth playerHealth;
 
     private void Awake()
     {
+        playerHealth = GetComponent<PlayerHealth>();
         if (targetFinder == null) targetFinder = GetComponent<PlayerTargetFinder>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (playerHealth.isDead == true) return;
         // 공격 처리
         TryAutoAttack();
     }

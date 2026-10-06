@@ -1,8 +1,11 @@
+using System.Linq;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
+using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,12 +14,18 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveDirection;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private PlayerHealth playerHealth;
+
+    private List<Transform> playerTransforms = new List<Transform>(10);
+    private float transformSaveTimer;
+    private float transformSaveInterval = 0.1f;
 
     private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        playerHealth = GetComponent<PlayerHealth>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -46,13 +55,24 @@ public class PlayerMovement : MonoBehaviour
         }
         else animator.SetBool("IsMoving", false);
 
-
+        //transformSaveTimer+= Time.deltaTime;
+        //if (transformSaveTimer >= transformSaveInterval)
+        //{
+        //    transformSaveTimer = 0;
+        //    playerTransforms.RemoveAt(0);
+        //    playerTransforms.Add(transform);
+        //    Debug.Log(playerTransforms);
+        //}
     }
 
     private void FixedUpdate()
     {
+        if (playerHealth.isDead == true)
+        {
+            playerRigidbody.linearVelocity = Vector2.zero;
+            return;
+        }
         Vector2 velocity = moveDirection * moveSpeed;
         playerRigidbody.linearVelocity = velocity;
-
     }
 }

@@ -1,11 +1,5 @@
 using UnityEngine;
 
-public enum DestyorType
-{
-    byTime,
-    byDistance
-}
-
 /// <summary>
 /// 투사체의 이동을 담당하는 클래스
 /// </summary>
@@ -20,29 +14,23 @@ public class ProjectileMovement : MonoBehaviour
     private bool isInitilaized = false;
 
     [SerializeField] private int damageAmount = 1;
-
-    [SerializeField] private DestyorType destroyType;
-    private float movedDistance = 0.0f;
-    private float maxMoveDistance = 8.0f;
+    [SerializeField] private int pierceCount = 1;
+    private int remainingPierceCount;
 
     private void Reset()
     {
         if (body == null) body = GetComponent<Rigidbody2D>();
     }
 
+    private void Awake()
+    {
+        remainingPierceCount = pierceCount;
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (destroyType == DestyorType.byTime)
-        {
-            Invoke("PrintMovedDistance", lifeTime);
-            Destroy(gameObject, lifeTime);
-        }
-    }
-
-    void PrintMovedDistance()
-    {
-        Debug.Log(movedDistance);
+        Destroy(gameObject, lifeTime);
     }
 
     /// <summary>
@@ -66,22 +54,15 @@ public class ProjectileMovement : MonoBehaviour
         if (isInitilaized == false) return;
 
         body.linearVelocity = moveDirection * moveSpeed;
-        
-        movedDistance += moveSpeed * Time.fixedDeltaTime;
-        if (destroyType == DestyorType.byDistance && movedDistance >= maxMoveDistance)
-        {
-            Debug.Log(movedDistance);
-            Destroy(gameObject);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy") == true)
-        {
-            EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
-            if (enemyHealth != null) enemyHealth.TakeDamage(damageAmount);
-            Destroy(gameObject);
-        }
+        EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
+        if (enemyHealth == null) return;
+        enemyHealth.TakeDamage(damageAmount);
+
+        remainingPierceCount--;
+        if (remainingPierceCount <= 0) Destroy(gameObject);
     }
 }

@@ -1,13 +1,18 @@
 using UnityEngine;
 using UnityEngine.Lumin;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 10;
     [SerializeField] private int currentHealth;
 
-    private bool isDead;
-    private bool isInvincible;
+    [SerializeField] private Image playerHP;
+
+    public bool isDead;
+    public bool isInvincible;
+    private float invincibleDuration = 1.0f;
+    private float invincibleTimer;
 
     private Animator playerAnimator;
 
@@ -17,6 +22,20 @@ public class PlayerHealth : MonoBehaviour
         isDead = false;
         isInvincible = false;
         playerAnimator = GetComponent<Animator>();
+        updatePlayerHPUI();
+    }
+
+    private void Update()
+    {
+        if (isInvincible == true)
+        {
+            invincibleTimer += Time.deltaTime;
+            if (invincibleTimer >= invincibleDuration)
+            {
+                isInvincible = false;
+                invincibleTimer = 0.0f;
+            }
+        }
     }
 
     public void TakeDamage(int damageAmount)
@@ -24,10 +43,9 @@ public class PlayerHealth : MonoBehaviour
         if (isDead == true) return;
         if (isInvincible == true) return;
 
-        currentHealth -= damageAmount;
-
         isInvincible = true;
-        Invoke(nameof(DisableInvincible), 1.0f);
+        currentHealth -= damageAmount;
+        updatePlayerHPUI();
 
         if (currentHealth <= 0)
         {
@@ -35,14 +53,17 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    void updatePlayerHPUI()
+    {
+        if (playerHP == null) return;
+
+        // C# 에서 정수/정수 = 정수이므로, float로 형변환 필요
+        playerHP.fillAmount = (float)currentHealth / (float)maxHealth;
+    }
+
     void Die()
     {
         isDead = true;
         playerAnimator.SetTrigger("Die");
-    }
-
-    void DisableInvincible()
-    {
-        isInvincible = false;
     }
 }
