@@ -234,3 +234,8 @@ MonoBehaviour:
   hitFeedbackInterval: 0.3
   hitFeedbackTimer: 0
   hitColor: {r: 0, g: 1, b: 0, a: 1}
+  expGemPrefabs:
+  - {fileID: 1841352489161937569, guid: 83f13a4f6cb6ce64dae7435cde877ee2, type: 3}
+  - {fileID: 1841352489161937569, guid: 68af3bce5a376764b94c0dd76ddf1dbe, type: 3}
+  - {fileID: 1841352489161937569, guid: 3ca89eb29ef48224db08272881da8a75, type: 3}
+  expAmount: 1

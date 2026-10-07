@@ -15,6 +15,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private EnemyChaser[] enemyPrefab;
     [SerializeField] private int[] enemyChance = { 65, 25, 10 };
     [SerializeField] private float[] enemySpeed = { 1.5f, 2.5f, 0.7f };
+    [SerializeField] private int[] enemyExp = { 1, 2, 3 };
 
     [SerializeField] private Transform playerTransform;
     [SerializeField] private float spawnInterval = 2.0f;
@@ -28,6 +29,7 @@ public class EnemySpawner : MonoBehaviour
     private int spawnCount;
     private float spawnTimer;
     private float spawnedEnemySpeed;
+    private int spawnedEnemyExpAmount;
 
     // Update is called once per frame
     void Update()
@@ -58,6 +60,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 newEnemy.SetTarget(playerTransform);
                 newEnemy.SetVelocity(spawnedEnemySpeed);
+                newEnemy.SetExpAmount(spawnedEnemyExpAmount);
             }
         }
     }
@@ -70,16 +73,19 @@ public class EnemySpawner : MonoBehaviour
         if (randomValue < enemyChance[(int)EnemyIndex.Heavy])
         {
             spawnedEnemySpeed = enemySpeed[(int)EnemyIndex.Heavy];
+            spawnedEnemyExpAmount = enemyExp[(int)EnemyIndex.Heavy];
             return enemyPrefab[(int)EnemyIndex.Heavy];
         }
         
         if (randomValue < enemyChance[(int)EnemyIndex.Heavy] + enemyChance[(int)EnemyIndex.Fast])
         {
             spawnedEnemySpeed = enemySpeed[(int)EnemyIndex.Fast];
+            spawnedEnemyExpAmount = enemyExp[(int)EnemyIndex.Fast];
             return enemyPrefab[(int)EnemyIndex.Fast];
         }
 
         spawnedEnemySpeed = enemySpeed[(int)EnemyIndex.Normal];
+        spawnedEnemyExpAmount = enemyExp[(int)EnemyIndex.Normal];
         return enemyPrefab[(int)EnemyIndex.Normal];
     }
 

@@ -17,6 +17,9 @@ public class EnemyHealth : MonoBehaviour
     private Color originColor;
     private bool isHit;
 
+    [SerializeField] private ExpGem[] expGemPrefabs;
+    [SerializeField] private int expAmount = 1;
+
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -67,6 +70,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void DeathAnimationEnd()
     {
+        DropExpGem();
         Destroy(gameObject);
     }
 
@@ -75,5 +79,18 @@ public class EnemyHealth : MonoBehaviour
         isHit = true;
         spriteRenderer.color = hitColor;
         hitFeedbackTimer = 0;
+    }
+
+    public void SetExpAmount(int amount)
+    {
+        expAmount = amount;
+    }
+
+    void DropExpGem()
+    {
+        if (expGemPrefabs == null || expGemPrefabs.Length == 0) return;
+
+        ExpGem expGem = Instantiate(expGemPrefabs[expAmount - 1], transform.position, Quaternion.identity);
+        if (expGem != null) expGem.Initialize(expAmount);
     }
 }

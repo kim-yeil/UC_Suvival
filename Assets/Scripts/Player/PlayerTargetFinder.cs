@@ -5,12 +5,11 @@ public class PlayerTargetFinder : MonoBehaviour
     [SerializeField] private float targetRange = 5.0f;
     [SerializeField] private LayerMask enemyLayer;
 
+    [SerializeField] private float expGainRange = 1.5f;
+    [SerializeField] private LayerMask expLayer;
+
     private Transform nearestTarget;
     private EnemyHealth enemyHealth;
-
-    private float targetFindTimer;
-    private string targetName;
-    private float targetDistance;
 
     // Update is called once per frame
     void Update()
@@ -21,7 +20,23 @@ public class PlayerTargetFinder : MonoBehaviour
         // 선 긋기
         DrawTargetLine();
 
-        PrintTarget();
+        // EXP 탐색
+        FindNearExpGem();
+    }
+
+    void FindNearExpGem()
+    {
+        Collider2D[] expGemsInRnage = 
+            Physics2D.OverlapCircleAll(transform.position, expGainRange, expLayer);
+
+        for (int i = 0; i < expGemsInRnage.Length; i++)
+        {
+            ExpGem expGem = expGemsInRnage[i].GetComponent<ExpGem>();
+            if (expGem == null) return;
+
+            expGem.SetTargetToPlayer(transform);
+            expGem.isTargeted = true;
+        }
     }
 
     void FingNearestTarget()
@@ -48,9 +63,7 @@ public class PlayerTargetFinder : MonoBehaviour
             if (distance < nearestDistance)
             {
                 nearestTarget = targetCollider.transform;
-                targetName = targetCollider.gameObject.name;
                 nearestDistance = distance;
-                targetDistance = distance;
             }
         }
     }
@@ -69,17 +82,6 @@ public class PlayerTargetFinder : MonoBehaviour
     public Transform GetNearestTarget()
     {
         return nearestTarget;
-    }
-
-    private void PrintTarget()
-    {
-        targetFindTimer += Time.deltaTime;
-
-        if (targetFindTimer < 1) return;
-
-        targetFindTimer = 0;
-        if (nearestTarget == null) Debug.Log("No Target");
-        else Debug.Log("가장 가까운 적 : " + targetName + " / 거리 : " + targetDistance);
     }
 
     private void OnDrawGizmosSelected()

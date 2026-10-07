@@ -83,6 +83,10 @@ public class EnemyChaser : MonoBehaviour
     {
         this.moveSpeed = moveSpeed;
     }
+    public void SetExpAmount(int amount)
+    {
+        enemyHealth.SetExpAmount(amount);
+    }
 
     Vector2 CalculateSeparationDirection(Vector2 enemyPosition)
     {
