@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.Lumin;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField] private TMP_Text playerHPText;
+
     [SerializeField] private int maxHealth = 10;
     [SerializeField] private int currentHealth;
 
@@ -22,7 +25,7 @@ public class PlayerHealth : MonoBehaviour
         isDead = false;
         isInvincible = false;
         playerAnimator = GetComponent<Animator>();
-        updatePlayerHPUI();
+        UpdatePlayerHPUI();
     }
 
     private void Update()
@@ -38,6 +41,12 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void GetHpRecoverItem(int amount)
+    {
+        currentHealth += amount;
+        if (currentHealth >= maxHealth) currentHealth = maxHealth;
+    }
+
     public void TakeDamage(int damageAmount)
     {
         if (isDead == true) return;
@@ -45,7 +54,7 @@ public class PlayerHealth : MonoBehaviour
 
         isInvincible = true;
         currentHealth -= damageAmount;
-        updatePlayerHPUI();
+        UpdatePlayerHPUI();
 
         if (currentHealth <= 0)
         {
@@ -53,12 +62,13 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void updatePlayerHPUI()
+    void UpdatePlayerHPUI()
     {
         if (playerHP == null) return;
 
         // C# 에서 정수/정수 = 정수이므로, float로 형변환 필요
         playerHP.fillAmount = (float)currentHealth / (float)maxHealth;
+        playerHPText.text = "HP : " + currentHealth.ToString() + " / " + maxHealth.ToString();
     }
 
     void Die()

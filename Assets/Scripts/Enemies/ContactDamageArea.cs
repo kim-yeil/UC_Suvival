@@ -4,6 +4,13 @@ public class ContactDamageArea : MonoBehaviour
 {
     [SerializeField] private int damageAmount = 1;
 
+    private EnemyHealth enemyHealth;
+
+    private void Awake()
+    {
+        enemyHealth = GetComponent<EnemyHealth>();
+    }
+
     /// <summary>
     /// 오브젝트가 Trigger 충돌 상태를 지속할 때 계속 호출
     /// </summary>
@@ -12,6 +19,7 @@ public class ContactDamageArea : MonoBehaviour
     {
         PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
         if (playerHealth == null) return;
+        if (enemyHealth.isDead == true) return;
         playerHealth.TakeDamage(damageAmount);
     }
 }

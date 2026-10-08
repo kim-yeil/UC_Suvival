@@ -39,10 +39,9 @@ public class ExpGem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
-        if (playerHealth == null) return;
-
-        Debug.Log("+ " + expAmount + " EXP");
+        PlayerExperience playerExperience = collision.GetComponent<PlayerExperience>();
+        if (playerExperience == null) return;
+        playerExperience.AddEXP(expAmount);
 
         Destroy(gameObject);
     }

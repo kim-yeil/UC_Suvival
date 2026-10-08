@@ -19,6 +19,7 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] private ExpGem[] expGemPrefabs;
     [SerializeField] private int expAmount = 1;
+    [SerializeField] private HpRecoverItem hpRecoverItemPrefab;
 
     private void Awake()
     {
@@ -84,6 +85,15 @@ public class EnemyHealth : MonoBehaviour
     public void SetExpAmount(int amount)
     {
         expAmount = amount;
+    }
+
+    void DropHpRecoverItem()
+    {
+        int dropProbability = Random.Range(1, 101);
+        if (dropProbability == 1)
+        {
+
+        }
     }
 
     void DropExpGem()
