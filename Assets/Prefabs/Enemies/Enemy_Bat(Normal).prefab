@@ -239,3 +239,4 @@ MonoBehaviour:
   - {fileID: 1841352489161937569, guid: 68af3bce5a376764b94c0dd76ddf1dbe, type: 3}
   - {fileID: 1841352489161937569, guid: 3ca89eb29ef48224db08272881da8a75, type: 3}
   expAmount: 1
+  hpRecoverItemPrefab: {fileID: 5303051655594037717, guid: 9e0651a901fb4a8409fbe57c751c37da, type: 3}

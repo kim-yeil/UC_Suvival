@@ -41,10 +41,13 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void GetHpRecoverItem(int amount)
+    public void Heal(int amount)
     {
+        if (isDead == true) return;
+
         currentHealth += amount;
-        if (currentHealth >= maxHealth) currentHealth = maxHealth;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+        UpdatePlayerHPUI();
     }
 
     public void TakeDamage(int damageAmount)

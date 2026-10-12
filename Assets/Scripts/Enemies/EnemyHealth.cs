@@ -72,6 +72,7 @@ public class EnemyHealth : MonoBehaviour
     public void DeathAnimationEnd()
     {
         DropExpGem();
+        DropHpRecoverItem();
         Destroy(gameObject);
     }
 
@@ -90,9 +91,11 @@ public class EnemyHealth : MonoBehaviour
     void DropHpRecoverItem()
     {
         int dropProbability = Random.Range(1, 101);
-        if (dropProbability == 1)
+        if (dropProbability <= 2)
         {
-
+            HpRecoverItem hpRecoverItem =
+                Instantiate(hpRecoverItemPrefab, transform.position, Quaternion.identity);
+            if (hpRecoverItem != null) hpRecoverItem.Initialize();
         }
     }
 

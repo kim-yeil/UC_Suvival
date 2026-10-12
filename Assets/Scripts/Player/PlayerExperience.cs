@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using Unity.UI;
 using UnityEngine.UI;
+using System;
 
 public class PlayerExperience : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class PlayerExperience : MonoBehaviour
 
     [SerializeField] private TMP_Text expText;
     [SerializeField] private Image expImage;
+
+    public event Action onLevelUp;
 
     private void Awake()
     {
@@ -45,6 +48,9 @@ public class PlayerExperience : MonoBehaviour
             currentEXP -= requiredEXP;
             currentLevel++;
             requiredEXP += expIncrement;
+
+            onLevelUp?.Invoke();
+
             Debug.Log("LevelUp! " + (currentLevel - 1) + " -> " + currentLevel);
         }
     }

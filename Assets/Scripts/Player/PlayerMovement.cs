@@ -75,4 +75,9 @@ public class PlayerMovement : MonoBehaviour
         Vector2 velocity = moveDirection * moveSpeed;
         playerRigidbody.linearVelocity = velocity;
     }
+
+    public void IncreaseMoveSpeed(float amount)
+    {
+        moveSpeed += amount;
+    }
 }
