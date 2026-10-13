@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 
 public class SurvivalDifficultyManager : MonoBehaviour
@@ -44,12 +45,11 @@ public class SurvivalDifficultyManager : MonoBehaviour
         survivalTime += Time.deltaTime;
         difficultyTimer += Time.deltaTime;
 
-        if (difficultyTimer < difficultyIncreaseInterval) return;
-
-        // ³­ÀÌµµ »ó½Â
-        IncreaseDifficulty();
-
-        difficultyTimer = 0.0f;
+        if (difficultyTimer >= difficultyIncreaseInterval)
+        {
+            IncreaseDifficulty();
+            difficultyTimer = 0.0f;
+        }        
     }
 
     void IncreaseDifficulty()

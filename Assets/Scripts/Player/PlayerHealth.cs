@@ -79,4 +79,14 @@ public class PlayerHealth : MonoBehaviour
         isDead = true;
         playerAnimator.SetTrigger("Die");
     }
+
+    public void MaxHealthIncrease(int amount)
+    {
+        if (isDead == true) return;
+
+        maxHealth += amount;
+
+        currentHealth = maxHealth;
+        UpdatePlayerHPUI();
+    }
 }

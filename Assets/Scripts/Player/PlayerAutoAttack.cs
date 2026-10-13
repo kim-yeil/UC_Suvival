@@ -12,6 +12,8 @@ public class PlayerAutoAttack : MonoBehaviour
     [SerializeField] private Transform projectileSpawnPoint;
     [SerializeField] private float projectileSpeed = 5.0f;
 
+    private int bonusDamage;
+
     private float nextAttackTime;
     private PlayerHealth playerHealth;
 
@@ -67,9 +69,29 @@ public class PlayerAutoAttack : MonoBehaviour
         if (projectileObject != null)
         {
             projectileObject.Initialized(direction.normalized, projectileSpeed);
+            projectileObject.DamageIncrease(bonusDamage);
             return true;
         }
 
         return false;
+    }
+
+    public void IncreaseDamage(int amount)
+    {
+        bonusDamage += amount;
+    }
+
+    public void IncreaseAttackSpeed(float amount)
+    {
+        attackInterval -= amount;
+        if (attackInterval < 0.15)
+        {
+            attackInterval = 0.15f;
+            Debug.Log("공격속도 MAX");
+        }
+    }
+    public void ProjectileSpeedIncrease(float amount)
+    {
+        projectileSpeed += amount;
     }
 }

@@ -46,6 +46,11 @@ public class ProjectileMovement : MonoBehaviour
         isInitilaized = true;
     }
 
+    public void DamageIncrease(int amount)
+    {
+        damageAmount += amount;
+    }
+
     /// <summary>
     /// 투사체의 방향과 속도가 정확히 적용 된 후에 투사체를 이동시킴
     /// </summary>

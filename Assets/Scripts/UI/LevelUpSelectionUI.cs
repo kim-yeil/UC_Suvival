@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,11 +7,17 @@ public class LevelUpSelectionUI : MonoBehaviour
     [SerializeField] private PlayerExperience playerExperience;
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PlayerHealth playerHealth;
+    [SerializeField] private PlayerAutoAttack playerAutoAttack;
 
     [SerializeField] private GameObject selectionPanel;
+    [SerializeField] private TMP_Text pendingCount;
 
     [SerializeField] private float moveSpeedIncrease = 0.5f;
     [SerializeField] private int healAmount = 2;
+    [SerializeField] private int damageIncrease = 1;
+    [SerializeField] private float attackIntervalDecrease = 0.1f;
+    [SerializeField] private float projectileSpeedIncrease = 0.5f;
+    [SerializeField] private int maxHealthIncrease = 2;
 
     private int pendingSelections;
 
@@ -37,9 +44,24 @@ public class LevelUpSelectionUI : MonoBehaviour
     {
         pendingSelections++;
         selectionPanel.SetActive(true);
+        pendingCount.text = "Select Count Left : " + pendingSelections;
         Time.timeScale = 0;
     }
     
+    public void ChooseProjectileSpeed()
+    {
+        playerAutoAttack.ProjectileSpeedIncrease(projectileSpeedIncrease);
+
+        FinishSelection();
+    }
+
+    public void ChooseMaxHealthIncrease()
+    {
+        playerHealth.MaxHealthIncrease(maxHealthIncrease);
+
+        FinishSelection();
+    }
+
     public void ChooseMoveSpeed()
     {
         playerMovement.IncreaseMoveSpeed(moveSpeedIncrease);
@@ -54,6 +76,25 @@ public class LevelUpSelectionUI : MonoBehaviour
 
         // 선택 종료.
         FinishSelection();
+    }
+
+    public void ChooseDamage()
+    {
+        playerAutoAttack.IncreaseDamage(damageIncrease);
+
+        FinishSelection();
+    }
+
+    public void ChooseAttackSpeed()
+    {
+        playerAutoAttack.IncreaseAttackSpeed(attackIntervalDecrease);
+
+        FinishSelection();
+    }
+
+    void ShowFourOptions()
+    {
+
     }
 
     void FinishSelection()
