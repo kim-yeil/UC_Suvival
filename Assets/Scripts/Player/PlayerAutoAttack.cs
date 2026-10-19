@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -11,6 +12,10 @@ public class PlayerAutoAttack : MonoBehaviour
 
     [SerializeField] private Transform projectileSpawnPoint;
     [SerializeField] private float projectileSpeed = 5.0f;
+
+    [SerializeField] private int projectileCount = 1;
+    [SerializeField] private float projectileSpreadAngle = 7.5f;
+    private float spreadStartAngle;
 
     private int bonusDamage;
 
@@ -63,17 +68,24 @@ public class PlayerAutoAttack : MonoBehaviour
 
         if (direction == Vector2.zero) return false; // 타겟과 발사 위치가 동일한 경우
 
-        ProjectileMovement projectileObject = 
-            Instantiate(projectilePrefab, startPosition, Quaternion.LookRotation(Vector3.forward, direction));
+        spreadStartAngle = (float)projectileCount * projectileSpreadAngle;
 
-        if (projectileObject != null)
+        for (int i = 0; i < projectileCount; i++)
         {
-            projectileObject.Initialized(direction.normalized, projectileSpeed);
-            projectileObject.DamageIncrease(bonusDamage);
-            return true;
+            Vector2 shotDirection = 
+                Quaternion.Euler(0, 0, spreadStartAngle - (i + 1) * projectileSpreadAngle) * direction;
+
+            ProjectileMovement projectileObject =
+            Instantiate(projectilePrefab, startPosition, Quaternion.LookRotation(Vector3.forward, shotDirection));
+
+            if (projectileObject != null)
+            {
+                projectileObject.Initialized(shotDirection.normalized, projectileSpeed);
+                projectileObject.DamageIncrease(bonusDamage);
+            }
         }
 
-        return false;
+        return true;
     }
 
     public void IncreaseDamage(int amount)
@@ -93,5 +105,11 @@ public class PlayerAutoAttack : MonoBehaviour
     public void ProjectileSpeedIncrease(float amount)
     {
         projectileSpeed += amount;
+    }
+
+    public void IncreaseSpreadProjectile(int amount)
+    {
+        projectileCount += amount;
+        if (projectileCount > 5) projectileCount = 5;
     }
 }
