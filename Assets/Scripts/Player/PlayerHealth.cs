@@ -86,7 +86,10 @@ public class PlayerHealth : MonoBehaviour
 
         maxHealth += amount;
 
-        currentHealth = maxHealth;
+        // currentHealth = maxHealth; <- 선택 시 체력 풀 회복
+
+        currentHealth += amount;
+
         UpdatePlayerHPUI();
     }
 }

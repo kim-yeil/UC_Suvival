@@ -6,14 +6,22 @@ using UnityEngine;
 /// </summary>
 public class PlayerAutoAttack : MonoBehaviour
 {
+    [SerializeField] private WeaponDataSO weaponData;
+
     [SerializeField] private PlayerTargetFinder targetFinder;
     [SerializeField] private float attackInterval = 0.7f;
+    [SerializeField] private float attackInterval2 = 0.7f;
     [SerializeField] ProjectileMovement projectilePrefab;
+    [SerializeField] ProjectileMovement projectilePrefab2;
 
     [SerializeField] private Transform projectileSpawnPoint;
     [SerializeField] private float projectileSpeed = 5.0f;
+    [SerializeField] private float projectileSpeed2 = 5.0f;
 
     [SerializeField] private int projectileCount = 1;
+    [SerializeField] private int projectileCount2 = 1;
+
+    [SerializeField] private int succededCount = 0;
     [SerializeField] private float projectileSpreadAngle = 7.5f;
     private float spreadStartAngle;
 
@@ -26,6 +34,15 @@ public class PlayerAutoAttack : MonoBehaviour
     {
         playerHealth = GetComponent<PlayerHealth>();
         if (targetFinder == null) targetFinder = GetComponent<PlayerTargetFinder>();
+
+        if (weaponData != null)
+        {
+            projectilePrefab = weaponData.projectilePrefab;
+            projectileSpeed = weaponData.projectileSpeed;
+            attackInterval = weaponData.attackInterval;
+            projectileCount = weaponData.projectileCount;
+            projectileSpreadAngle = weaponData.spreadAngle;
+        }
     }
 
     // Update is called once per frame
@@ -81,6 +98,10 @@ public class PlayerAutoAttack : MonoBehaviour
             if (projectileObject != null)
             {
                 projectileObject.Initialized(shotDirection.normalized, projectileSpeed);
+
+                // 총알의 기본 데미지를 전달하는 함수
+                if (weaponData != null) projectileObject.SetBaseDamage(weaponData.baseDamage);
+
                 projectileObject.DamageIncrease(bonusDamage);
             }
         }

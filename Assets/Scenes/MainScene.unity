@@ -204,7 +204,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1185125496}
         m_TargetAssemblyTypeName: LevelUpSelectionUI, Assembly-CSharp
-        m_MethodName: ChooseMoveSpeed
+        m_MethodName: Button1Pressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -337,7 +337,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1185125496}
         m_TargetAssemblyTypeName: LevelUpSelectionUI, Assembly-CSharp
-        m_MethodName: ChooseHeal
+        m_MethodName: Button2Pressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1290,14 +1290,20 @@ MonoBehaviour:
   playerMovement: {fileID: 1348849373}
   playerHealth: {fileID: 1348849375}
   playerAutoAttack: {fileID: 1348849377}
+  playerStats: {fileID: 1348849379}
   selectionPanel: {fileID: 1389694958}
   pendingCount: {fileID: 982392288}
+  buttonTexts:
+  - {fileID: 2074070848}
+  - {fileID: 1027111124}
+  - {fileID: 857837553}
   moveSpeedIncrease: 0.5
   healAmount: 2
   damageIncrease: 1
   attackIntervalDecrease: 0.1
   projectileSpeedIncrease: 0.5
   maxHealthIncrease: 2
+  hpRegenIncrease: 1
   spreadProjectileCountIncrease: 1
 --- !u!1 &1348849368
 GameObject:
@@ -1317,6 +1323,7 @@ GameObject:
   - component: {fileID: 1348849376}
   - component: {fileID: 1348849377}
   - component: {fileID: 1348849378}
+  - component: {fileID: 1348849379}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1548,6 +1555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f9835a279d5f514e9826fbb337fa873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAutoAttack
+  weaponData: {fileID: 11400000, guid: 0f3cf49d1c2d7ea40b93e660d757110b, type: 2}
   targetFinder: {fileID: 1348849376}
   attackInterval: 0.7
   projectilePrefab: {fileID: 836390279991871764, guid: a4603975b3b8c42408e3b459927d98d9, type: 3}
@@ -1572,6 +1580,20 @@ MonoBehaviour:
   expIncrement: 5
   expText: {fileID: 2046322234}
   expImage: {fileID: 1459562905}
+--- !u!114 &1348849379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348849368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b403377fb2f6921449615e98feac8c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
+  playerHealth: {fileID: 1348849375}
+  hpRegenInterval: 5
 --- !u!1 &1371906237
 GameObject:
   m_ObjectHideFlags: 0
@@ -2623,7 +2645,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1185125496}
         m_TargetAssemblyTypeName: LevelUpSelectionUI, Assembly-CSharp
-        m_MethodName: ChooseDamage
+        m_MethodName: Button3Pressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
