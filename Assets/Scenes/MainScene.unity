@@ -888,10 +888,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Damage + 1
+  m_text: "\uC120\uD0DD 3"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 46e9cfab9e9f99b4da96fa7495bde7b3, type: 2}
+  m_sharedMaterial: {fileID: -6032639771403484905, guid: 46e9cfab9e9f99b4da96fa7495bde7b3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1162,10 +1162,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Heal 2 HP
+  m_text: "\uC120\uD0DD 2"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 46e9cfab9e9f99b4da96fa7495bde7b3, type: 2}
+  m_sharedMaterial: {fileID: -6032639771403484905, guid: 46e9cfab9e9f99b4da96fa7495bde7b3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1558,10 +1558,15 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: 0f3cf49d1c2d7ea40b93e660d757110b, type: 2}
   targetFinder: {fileID: 1348849376}
   attackInterval: 0.7
+  attackInterval2: 0.7
   projectilePrefab: {fileID: 836390279991871764, guid: a4603975b3b8c42408e3b459927d98d9, type: 3}
+  projectilePrefab2: {fileID: 0}
   projectileSpawnPoint: {fileID: 1428345510}
   projectileSpeed: 5
+  projectileSpeed2: 5
   projectileCount: 1
+  projectileCount2: 1
+  succededCount: 0
   projectileSpreadAngle: 7.5
 --- !u!114 &1348849378
 MonoBehaviour:
@@ -1946,16 +1951,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1683fad2d3603e7409b987baa313f5f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
+  enemyCatalog: {fileID: 11400000, guid: 3b4f0be62e34b0845888a64b9c983189, type: 2}
   enemyPrefab:
   - {fileID: 625747233575496910, guid: b9beafb703b5a5a48860763b3adf163f, type: 3}
   - {fileID: 625747233575496910, guid: 506fe9825e700514ab52965d97509a47, type: 3}
   - {fileID: 625747233575496910, guid: 049b3d11cbcf9ec4b9de18c14f01f8f9, type: 3}
-  enemyChance: 41000000190000000a000000
-  enemySpeed:
-  - 1.5
-  - 2.5
-  - 0.5
-  enemyExp: 010000000200000003000000
   playerTransform: {fileID: 1348849372}
   spawnInterval: 2
   minSpawnDistance: 6
@@ -2408,6 +2408,7 @@ MonoBehaviour:
   difficultyIncreaseInterval: 15
   spawnintervalDecrease: 0.2
   minSpawnInterval: 0.5
+  waveTable: {fileID: 11400000, guid: abf0f0ec8965cbd4a8361b9b542701db, type: 2}
 --- !u!4 &2012652485
 Transform:
   m_ObjectHideFlags: 0
@@ -2750,10 +2751,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Move Speed + 0.5
+  m_text: "\uC120\uD0DD 1"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 46e9cfab9e9f99b4da96fa7495bde7b3, type: 2}
+  m_sharedMaterial: {fileID: -6032639771403484905, guid: 46e9cfab9e9f99b4da96fa7495bde7b3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

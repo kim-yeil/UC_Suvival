@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be14c21631bdbb046a1428d9e26eef7a, type: 3}
+  m_Name: WaveTable
+  m_EditorClassIdentifier: Assembly-CSharp::WaveTableSO
+  waves:
+  - waveName: Wave1
+    enemyWeights:
+    - enemyId: enemy_normal
+      weight: 8
+    - enemyId: enemy_fast
+      weight: 2
+    - enemyId: enemy_heavy
+      weight: 0
+  - waveName: Wave2
+    enemyWeights:
+    - enemyId: enemy_normal
+      weight: 6
+    - enemyId: enemy_fast
+      weight: 3
+    - enemyId: enemy_heavy
+      weight: 1
+  - waveName: Wave3
+    enemyWeights:
+    - enemyId: enemy_normal
+      weight: 4
+    - enemyId: enemy_fast
+      weight: 4
+    - enemyId: enemy_heavy
+      weight: 2
+  - waveName: Wave4
+    enemyWeights:
+    - enemyId: enemy_normal
+      weight: 2
+    - enemyId: enemy_fast
+      weight: 5
+    - enemyId: enemy_heavy
+      weight: 3
+  - waveName: Wave5
+    enemyWeights:
+    - enemyId: enemy_normal
+      weight: 0
+    - enemyId: enemy_fast
+      weight: 6
+    - enemyId: enemy_heavy
+      weight: 4

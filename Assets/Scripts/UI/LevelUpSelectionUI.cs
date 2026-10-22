@@ -13,7 +13,8 @@ public enum Upgrades
     MoveSpeed,
     Heal,
     ProjectileDamage,
-    AttackCooldown
+    AttackCooldown,
+    HpRegen
 }
 
 public class LevelUpSelectionUI : MonoBehaviour
@@ -36,7 +37,8 @@ public class LevelUpSelectionUI : MonoBehaviour
         "Move Speed + 0.5",
         "Heal (+ 2 HP)",
         "Projectile Damage + 1",
-        "Attack Cooldown - 0.1"};
+        "Attack Cooldown - 0.1",
+        "HP Regen (+ 2 HP / 5s)"};
 
     [SerializeField] private float moveSpeedIncrease = 0.5f;
     [SerializeField] private int healAmount = 2;
@@ -49,10 +51,10 @@ public class LevelUpSelectionUI : MonoBehaviour
         
     private int[] buttons = new int[3];
     private int[] upgradeLevels = 
-        new int[] {0, 0, 0, 0, 0, 0, 0};
+        new int[] {0, 0, 0, 0, 0, 0, 0, 0};
     private int[] maxUpgradeLevels =
-        new int[] {4, 6, 10000, 6, 10000, 10000, 5};
-    private static int upgradeKind = 7;
+        new int[] {4, 6, 10000, 6, 10000, 10000, 5, 3};
+    private static int upgradeKind = 8;
     private List<int> nums;
     private List<int> shuffledNums;
     private int selectedIndex;
@@ -137,6 +139,7 @@ public class LevelUpSelectionUI : MonoBehaviour
             case 4: ChooseHeal(); break;
             case 5: ChooseDamage(); break;
             case 6: ChooseAttackSpeed(); break;
+            case 7: ChooseHPRegen(); break;
         }
     }
 

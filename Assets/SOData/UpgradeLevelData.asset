@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c140c0252a9275142ba1e56ffca8b5de, type: 3}
+  m_Name: UpgradeLevelData
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeLevelDataSO
+  maxUpgradeLevels: e8030000e80300000300000006000000e80300000400000006000000050000000400000001000000e80300000200000004000000
+  upgradeTexts:
+  - Max Health + 4
+  - Heal 2 HP
+  - HP Regen + 2 HP/5s
+  - Move Speed + 0.5
+  - Bullet Damage + 1
+  - Spread Bullet + 1
+  - Bullet Speed + 0.5
+  - Bullet Projectile Interval - 0.1
+  - Succeding Bullet + 1
+  - Enable Back Bullet (D1 / 3s)
+  - 
+  - 
+  - 
