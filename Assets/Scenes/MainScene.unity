@@ -1960,8 +1960,6 @@ MonoBehaviour:
   spawnInterval: 2
   minSpawnDistance: 6
   maxSpawnDistance: 9
-  minVelocity: 1
-  maxVelocity: 3
 --- !u!4 &1462718159
 Transform:
   m_ObjectHideFlags: 0

@@ -21,7 +21,19 @@ MonoBehaviour:
       weight: 2
     - enemyId: enemy_heavy
       weight: 0
+    - enemyId: enemy_ranged
+      weight: 0
   - waveName: Wave2
+    enemyWeights:
+    - enemyId: enemy_normal
+      weight: 7
+    - enemyId: enemy_fast
+      weight: 3
+    - enemyId: enemy_heavy
+      weight: 0
+    - enemyId: enemy_ranged
+      weight: 0
+  - waveName: Wave3
     enemyWeights:
     - enemyId: enemy_normal
       weight: 6
@@ -29,27 +41,25 @@ MonoBehaviour:
       weight: 3
     - enemyId: enemy_heavy
       weight: 1
-  - waveName: Wave3
-    enemyWeights:
-    - enemyId: enemy_normal
-      weight: 4
-    - enemyId: enemy_fast
-      weight: 4
-    - enemyId: enemy_heavy
-      weight: 2
+    - enemyId: enemy_ranged
+      weight: 0
   - waveName: Wave4
     enemyWeights:
     - enemyId: enemy_normal
-      weight: 2
-    - enemyId: enemy_fast
       weight: 5
-    - enemyId: enemy_heavy
+    - enemyId: enemy_fast
       weight: 3
+    - enemyId: enemy_heavy
+      weight: 1
+    - enemyId: enemy_ranged
+      weight: 1
   - waveName: Wave5
     enemyWeights:
     - enemyId: enemy_normal
-      weight: 0
-    - enemyId: enemy_fast
-      weight: 6
-    - enemyId: enemy_heavy
       weight: 4
+    - enemyId: enemy_fast
+      weight: 3
+    - enemyId: enemy_heavy
+      weight: 2
+    - enemyId: enemy_ranged
+      weight: 1

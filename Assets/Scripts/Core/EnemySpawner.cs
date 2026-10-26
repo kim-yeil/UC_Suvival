@@ -23,9 +23,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float minSpawnDistance = 6.0f;
     [SerializeField] private float maxSpawnDistance = 9.0f;
 
-    [SerializeField] private float minVelocity = 1.0f;
-    [SerializeField] private float maxVelocity = 3.0f;
-
     private int spawnCount;
     private float spawnTimer;
     private float spawnedEnemySpeed;
@@ -87,6 +84,10 @@ public class EnemySpawner : MonoBehaviour
             if (randomInt < accumulatedWeight)
             {
                 GameObject obj = enemyCatalog.FindPrefab(entry.enemyId);
+                if (obj == null) return null;
+
+                spawnedEnemySpeed = enemyCatalog.FindEnemySpeed(entry.enemyId);
+                spawnedEnemyExpAmount = enemyCatalog.FindEnemyEXP(entry.enemyId);
                 EnemyChaser enemyChaser = obj.GetComponent<EnemyChaser>();
                 return enemyChaser;
             }

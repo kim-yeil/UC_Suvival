@@ -103,7 +103,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (expGemPrefabs == null || expGemPrefabs.Length == 0) return;
 
-        ExpGem expGem = Instantiate(expGemPrefabs[expAmount], transform.position, Quaternion.identity);
+        ExpGem expGem = Instantiate(expGemPrefabs[expAmount - 1], transform.position, Quaternion.identity);
         if (expGem != null) expGem.Initialize(expAmount);
     }
 }
