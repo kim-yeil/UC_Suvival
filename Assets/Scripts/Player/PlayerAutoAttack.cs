@@ -1,48 +1,28 @@
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 /// <summary>
 /// 플레이어의 자동 공격을 담당하는 Class
 /// </summary>
-public class PlayerAutoAttack : MonoBehaviour
+public class PlayerAutoAttack : WeaponBase // WeaponBase를 상속받음
 {
-    [SerializeField] private WeaponDataSO weaponData;
-
     [SerializeField] private PlayerTargetFinder targetFinder;
-    [SerializeField] private float attackInterval = 0.7f;
-    [SerializeField] private float attackInterval2 = 0.7f;
-    [SerializeField] ProjectileMovement projectilePrefab;
-    [SerializeField] ProjectileMovement projectilePrefab2;
-
-    [SerializeField] private Transform projectileSpawnPoint;
-    [SerializeField] private float projectileSpeed = 5.0f;
-    [SerializeField] private float projectileSpeed2 = 5.0f;
-
-    [SerializeField] private int projectileCount = 1;
-    [SerializeField] private int projectileCount2 = 1;
-
-    [SerializeField] private int succededCount = 0;
-    [SerializeField] private float projectileSpreadAngle = 7.5f;
-    private float spreadStartAngle;
-
-    private int bonusDamage;
-
-    private float nextAttackTime;
+    [SerializeField] private int projectileCount;
+    [SerializeField] private float projectileSpreadAngle;
+    [SerializeField] private float spreadStartAngle;
+        
     private PlayerHealth playerHealth;
 
     private void Awake()
     {
+        InitializeWeapon();
+
+        // 투사체 개수, 각도 적용
+        ApplySpreadSettings();
+
         playerHealth = GetComponent<PlayerHealth>();
         if (targetFinder == null) targetFinder = GetComponent<PlayerTargetFinder>();
-
-        if (weaponData != null)
-        {
-            projectilePrefab = weaponData.projectilePrefab;
-            projectileSpeed = weaponData.projectileSpeed;
-            attackInterval = weaponData.attackInterval;
-            projectileCount = weaponData.projectileCount;
-            projectileSpreadAngle = weaponData.spreadAngle;
-        }
     }
 
     // Update is called once per frame
@@ -60,7 +40,7 @@ public class PlayerAutoAttack : MonoBehaviour
     {
         if (targetFinder == null) return; // PlayerTargetFinder 확인
 
-        if (Time.time < nextAttackTime) return; // 공격 가능 시간 확인
+        if (CanAttack() == false) return; // 공격 가능 시간 확인
 
         Transform target = targetFinder.GetNearestTarget();
         if (target == null) return; // 공격 타겟 유무 확인
@@ -68,61 +48,32 @@ public class PlayerAutoAttack : MonoBehaviour
         bool isProjectileCreated = SpawnProjectile(target);
         if (isProjectileCreated == false) return;
 
-        nextAttackTime = Time.time + attackInterval;
+        FinishAttack();
     }
 
     bool SpawnProjectile(Transform target)
     {
-        if (projectilePrefab == null)
-        {
-            Debug.LogWarning("투사체 Prefab 없음!");
-            return false;
-        }
-
-        Vector2 startPosition = projectileSpawnPoint.position;
+        Vector2 startposition = GetSpawnPosition();
         Vector2 targetPosition = target.position;
-        Vector2 direction = targetPosition - startPosition;
+        Vector2 direction = targetPosition - startposition;
+        if (direction == Vector2.zero) return false;
 
-        if (direction == Vector2.zero) return false; // 타겟과 발사 위치가 동일한 경우
+        bool createAny = false; // 반환용 값
 
-        spreadStartAngle = (float)projectileCount * projectileSpreadAngle;
+        spreadStartAngle = projectileCount * projectileSpreadAngle;
 
         for (int i = 0; i < projectileCount; i++)
         {
-            Vector2 shotDirection = 
+            Vector2 shotDirection =
                 Quaternion.Euler(0, 0, spreadStartAngle - (i + 1) * projectileSpreadAngle) * direction;
 
-            ProjectileMovement projectileObject =
-            Instantiate(projectilePrefab, startPosition, Quaternion.LookRotation(Vector3.forward, shotDirection));
-
-            if (projectileObject != null)
-            {
-                projectileObject.Initialized(shotDirection.normalized, projectileSpeed);
-
-                // 총알의 기본 데미지를 전달하는 함수
-                if (weaponData != null) projectileObject.SetBaseDamage(weaponData.baseDamage);
-
-                projectileObject.DamageIncrease(bonusDamage);
-            }
+            if (FireProjectile(shotDirection) == true) createAny = true;
         }
 
-        return true;
+        return createAny;
     }
 
-    public void IncreaseDamage(int amount)
-    {
-        bonusDamage += amount;
-    }
-
-    public void IncreaseAttackSpeed(float amount)
-    {
-        attackInterval -= amount;
-        if (attackInterval < 0.15)
-        {
-            attackInterval = 0.15f;
-            Debug.Log("공격속도 MAX");
-        }
-    }
+    
     public void ProjectileSpeedIncrease(float amount)
     {
         projectileSpeed += amount;
@@ -132,5 +83,12 @@ public class PlayerAutoAttack : MonoBehaviour
     {
         projectileCount += amount;
         if (projectileCount > 5) projectileCount = 5;
+    }
+
+    void ApplySpreadSettings()
+    {
+        WeaponDataSO data = GetWeaponData();
+        projectileCount = data.projectileCount;
+        projectileSpreadAngle = data.spreadAngle;
     }
 }

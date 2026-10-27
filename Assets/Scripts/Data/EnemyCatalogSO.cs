@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 /// <summary>
 /// 클래스의 직렬화 -> Inspector 창에 표시됨
@@ -19,63 +20,49 @@ public class EnemyCatalogSO : ScriptableObject
 {
     public List<EnemyInfo> enemies = new List<EnemyInfo>();
 
-    private Dictionary<string, GameObject> prefabLookup;
-    private Dictionary<string, float> enemySpeeds;
-    private Dictionary<string, int> enemyEXPs;
+    private Dictionary<string, EnemyInfo> enemyLookup;
 
-    void BuildPrefabLookup()
+    void BuildEnemyLookup()
     {
-        prefabLookup = new Dictionary<string, GameObject>();
-        enemySpeeds = new Dictionary<string, float>();
-        enemyEXPs = new Dictionary<string, int>();
+        enemyLookup = new Dictionary<string, EnemyInfo>();
 
         for (int i = 0; i < enemies.Count; i++)
         {
             EnemyInfo enemy = enemies[i];
 
             // null 체크
-            if (enemy == null || string.IsNullOrEmpty(enemy.id) == true
-                || enemy.enemyPrefab == null) continue;
+            if (enemy == null || string.IsNullOrEmpty(enemy.id) == true) continue;
 
             // 중복 ID 체크
-            if (prefabLookup.ContainsKey(enemy.id) == true) continue;
+            if (enemyLookup.ContainsKey(enemy.id) == true) continue;
 
             // Dictionary에 추가
-            prefabLookup.Add(enemy.id, enemy.enemyPrefab);
-            enemySpeeds.Add(enemy.id, enemy.enemySpeed);
-            enemyEXPs.Add(enemy.id, enemy.enemyEXP);
+            enemyLookup.Add(enemy.id, enemy);
         }
     }
-
-    public GameObject FindPrefab(string enemyId)
+    public EnemyInfo FindEnemy(string enemyId)
     {
-        if (prefabLookup == null) BuildPrefabLookup();
+        if (enemyLookup == null)
+            BuildEnemyLookup();
 
-        // Dictionary 문법을 이용한 두 가지 방법.
-
-        // 첫번째 방법
-        GameObject foundPrefab;
-
-        // out : 매개변수의 값이 아닌 주소 값을 가져옴
-        if (prefabLookup.TryGetValue(enemyId, out foundPrefab) == true) return foundPrefab;
-
-        // 두번째 방법
-        //if (prefabLookup.ContainsKey(enemyId) == true) return prefabLookup[enemyId];
+        if (enemyLookup.TryGetValue(enemyId, out EnemyInfo enemy))
+            return enemy;
 
         return null;
     }
 
+    public GameObject FindPrefab(string enemyId)
+    {
+        return FindEnemy(enemyId)?.enemyPrefab;
+    }
+
     public float FindEnemySpeed(string enemyId)
     {
-        if (enemySpeeds.ContainsKey(enemyId) == true) return enemySpeeds[enemyId];
-
-        return 0;
+        return FindEnemy(enemyId)?.enemySpeed?? 0;
     }
 
     public int FindEnemyEXP(string enemyId)
     {
-        if (enemyEXPs.ContainsKey(enemyId) == true) return enemyEXPs[enemyId];
-
-        return 0;
+        return FindEnemy(enemyId)?.enemyEXP?? 0;
     }
 }
