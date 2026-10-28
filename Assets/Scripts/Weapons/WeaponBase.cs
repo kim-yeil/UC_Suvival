@@ -1,7 +1,7 @@
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class WeaponBase : MonoBehaviour
+public abstract class WeaponBase : MonoBehaviour
 {
     [SerializeField] private WeaponDataSO weaponData;
     [SerializeField] ProjectileMovement projectilePrefab;
@@ -77,4 +77,13 @@ public class WeaponBase : MonoBehaviour
             Debug.Log("공격속도 MAX");
         }
     }
+
+    public void TryAttack()
+    {
+        if (CanAttack() != true) return;
+        if (Attack() == true) FinishAttack();
+    }
+
+    // abstract : 상속 받는 클래스가 정의를 해야함
+    protected abstract bool Attack();
 }

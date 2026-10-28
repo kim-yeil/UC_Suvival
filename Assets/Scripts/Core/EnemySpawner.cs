@@ -27,6 +27,7 @@ public class EnemySpawner : MonoBehaviour
     private float spawnTimer;
     private float spawnedEnemySpeed;
     private int spawnedEnemyExpAmount;
+    private int spawnedEnemyHealth;
 
     private WaveInfo currentWaveData;
 
@@ -60,6 +61,7 @@ public class EnemySpawner : MonoBehaviour
                 newEnemy.SetTarget(playerTransform);
                 newEnemy.SetVelocity(spawnedEnemySpeed);
                 newEnemy.SetExpAmount(spawnedEnemyExpAmount);
+                newEnemy.SetEnemyHealth(spawnedEnemyHealth);
             }
         }
     }
@@ -88,6 +90,7 @@ public class EnemySpawner : MonoBehaviour
 
                 spawnedEnemySpeed = enemyCatalog.FindEnemySpeed(entry.enemyId);
                 spawnedEnemyExpAmount = enemyCatalog.FindEnemyEXP(entry.enemyId);
+                spawnedEnemyHealth = enemyCatalog.FindEnemyHP(entry.enemyId);
                 EnemyChaser enemyChaser = obj.GetComponent<EnemyChaser>();
                 return enemyChaser;
             }

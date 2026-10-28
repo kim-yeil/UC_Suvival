@@ -2,7 +2,7 @@ using Microsoft.Win32.SafeHandles;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealth : MonoBehaviour, IDamageable // interface IDamageable 탑재. 상속 X.
 {
     [SerializeField] private int maxHealth = 3;
     private int currentHealth;
@@ -22,8 +22,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private HpRecoverItem hpRecoverItemPrefab;
 
     private void Awake()
-    {
-        currentHealth = maxHealth;
+    {        
         isDead = false;
         isHit = false;
         animator = GetComponent<Animator>();
@@ -86,6 +85,12 @@ public class EnemyHealth : MonoBehaviour
     public void SetExpAmount(int amount)
     {
         expAmount = amount;
+    }
+
+    public void SetEnemyHealth(int amount)
+    {
+        maxHealth = amount;
+        currentHealth = maxHealth;
     }
 
     void DropHpRecoverItem()

@@ -88,6 +88,11 @@ public class EnemyChaser : MonoBehaviour
         enemyHealth.SetExpAmount(amount);
     }
 
+    public void SetEnemyHealth(int amount)
+    {
+        enemyHealth.SetEnemyHealth(amount);
+    }
+
     Vector2 CalculateSeparationDirection(Vector2 enemyPosition)
     {
         Collider2D[] nearbyEnemies

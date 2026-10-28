@@ -25,32 +25,6 @@ public class PlayerAutoAttack : WeaponBase // WeaponBase를 상속받음
         if (targetFinder == null) targetFinder = GetComponent<PlayerTargetFinder>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (playerHealth.isDead == true) return;
-        // 공격 처리
-        TryAutoAttack();
-    }
-
-    /// <summary>
-    /// 매 프레임 마다 공격을 시도하는 함수
-    /// </summary>
-    void TryAutoAttack()
-    {
-        if (targetFinder == null) return; // PlayerTargetFinder 확인
-
-        if (CanAttack() == false) return; // 공격 가능 시간 확인
-
-        Transform target = targetFinder.GetNearestTarget();
-        if (target == null) return; // 공격 타겟 유무 확인
-
-        bool isProjectileCreated = SpawnProjectile(target);
-        if (isProjectileCreated == false) return;
-
-        FinishAttack();
-    }
-
     bool SpawnProjectile(Transform target)
     {
         Vector2 startposition = GetSpawnPosition();
@@ -90,5 +64,15 @@ public class PlayerAutoAttack : WeaponBase // WeaponBase를 상속받음
         WeaponDataSO data = GetWeaponData();
         projectileCount = data.projectileCount;
         projectileSpreadAngle = data.spreadAngle;
+    }
+
+    protected override bool Attack()
+    {
+        if (targetFinder == null) return false;
+
+        Transform target = targetFinder.GetNearestTarget();
+        if (target == null) return false;
+
+        return SpawnProjectile(target);
     }
 }

@@ -68,9 +68,9 @@ public class ProjectileMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
-        if (enemyHealth == null) return;
-        enemyHealth.TakeDamage(damageAmount);
+        IDamageable target = collision.GetComponent<IDamageable>();
+        if (target == null) return;
+        target.TakeDamage(damageAmount);
 
         remainingPierceCount--;
         if (remainingPierceCount <= 0) Destroy(gameObject);

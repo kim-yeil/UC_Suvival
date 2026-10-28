@@ -9,13 +9,11 @@ public class CrossAutoAttack : WeaponBase
         InitializeWeapon();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override bool Attack()
     {
-        if (CanAttack() == false) return;
+        bool createAny = false;
 
-        for (int i = 0; i < directions.Length; i++) FireProjectile(directions[i]);
-
-        FinishAttack();
+        for (int i = 0; i < directions.Length; i++) createAny = FireProjectile(directions[i]);
+        return createAny;
     }
 }

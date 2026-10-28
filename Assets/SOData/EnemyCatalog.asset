@@ -17,15 +17,19 @@ MonoBehaviour:
     enemyPrefab: {fileID: 1954415435069277618, guid: b9beafb703b5a5a48860763b3adf163f, type: 3}
     enemySpeed: 1.5
     enemyEXP: 1
+    enemyHP: 3
   - id: enemy_fast
     enemyPrefab: {fileID: 1954415435069277618, guid: 506fe9825e700514ab52965d97509a47, type: 3}
     enemySpeed: 3
     enemyEXP: 2
+    enemyHP: 2
   - id: enemy_heavy
     enemyPrefab: {fileID: 1954415435069277618, guid: 049b3d11cbcf9ec4b9de18c14f01f8f9, type: 3}
     enemySpeed: 0.75
     enemyEXP: 3
+    enemyHP: 5
   - id: enemy_ranged
     enemyPrefab: {fileID: 1954415435069277618, guid: 150cc8429da67994e83d6587ee953cfb, type: 3}
     enemySpeed: 0.5
-    enemyEXP: 3
+    enemyEXP: 2
+    enemyHP: 0

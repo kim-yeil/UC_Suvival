@@ -13,6 +13,7 @@ public class EnemyInfo
     public GameObject enemyPrefab;
     public float enemySpeed;
     public int enemyEXP;
+    public int enemyHP;
 }
 
 [CreateAssetMenu(fileName = "EnemyCatalog", menuName = "Game/Enemy Catalog")]
@@ -64,5 +65,10 @@ public class EnemyCatalogSO : ScriptableObject
     public int FindEnemyEXP(string enemyId)
     {
         return FindEnemy(enemyId)?.enemyEXP?? 0;
+    }
+
+    public int FindEnemyHP(string enemyId)
+    {
+        return FindEnemy(enemyId)?.enemyHP ?? 0;
     }
 }
