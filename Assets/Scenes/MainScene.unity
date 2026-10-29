@@ -1428,6 +1428,7 @@ GameObject:
   - component: {fileID: 1348849378}
   - component: {fileID: 1348849379}
   - component: {fileID: 1348849380}
+  - component: {fileID: 1348849381}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1695,7 +1696,34 @@ MonoBehaviour:
   weapons:
   - {fileID: 1008803956}
   - {fileID: 810066446}
+  - {fileID: 0}
   playerHealth: {fileID: 1348849375}
+--- !u!114 &1348849381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348849368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0141ddac349b8c04a9bb0ae40fa3d964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeAutoAttack
+  weaponData: {fileID: 11400000, guid: 614cafc78bc7fcd4f97fc743890c15e4, type: 2}
+  projectilePrefab: {fileID: 0}
+  projectileSpawnPoint: {fileID: 0}
+  projectileSpeed: 5
+  attackInterval: 0.7
+  succededCount: 0
+  animator: {fileID: 1348849374}
+  playerHealth: {fileID: 1348849375}
+  targetFinder: {fileID: 1348849376}
+  forwardDistance: 0.8
+  hitRadius: 0.85
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1371906237
 GameObject:
   m_ObjectHideFlags: 0

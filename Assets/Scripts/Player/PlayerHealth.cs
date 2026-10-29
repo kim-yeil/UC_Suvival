@@ -57,12 +57,8 @@ public class PlayerHealth : MonoBehaviour
 
         isInvincible = true;
         currentHealth -= damageAmount;
+        playerAnimator.SetTrigger("Hit");
         UpdatePlayerHPUI();
-
-        if (currentHealth <= 0)
-        {
-            Die(); //»ç¸ÁÃ³¸®
-        }
     }
 
     void UpdatePlayerHPUI()
@@ -74,8 +70,9 @@ public class PlayerHealth : MonoBehaviour
         playerHPText.text = "HP : " + currentHealth.ToString() + " / " + maxHealth.ToString();
     }
 
-    void Die()
+    public void DieCheck()
     {
+        if (currentHealth > 0) return;
         isDead = true;
         playerAnimator.SetTrigger("Die");
     }

@@ -1,5 +1,5 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+using System.Collections.Generic;
 
 public abstract class WeaponBase : MonoBehaviour
 {
@@ -86,4 +86,32 @@ public abstract class WeaponBase : MonoBehaviour
 
     // abstract : 상속 받는 클래스가 정의를 해야함
     protected abstract bool Attack();
+
+    protected int GetAttackDamage()
+    {
+        int baseDamage = 1; // 무기 데이터 지정 없을 시 default 값
+        if (weaponData != null) baseDamage = weaponData.baseDamage;
+
+        return Mathf.Max(1, baseDamage + bonusDamage);
+    }
+
+    protected int DamageTargetsInCircle(Vector2 center, float radius, LayerMask targetLayers)
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(center, radius, targetLayers);
+
+        List<IDamageable> hitTargets = new List<IDamageable>();
+        int damage = GetAttackDamage();
+
+        foreach(Collider2D hitCollider in colliders)
+        {
+            IDamageable damageable = hitCollider.GetComponent<IDamageable>();
+            if (damageable == null) continue;
+            if (hitTargets.Contains(damageable) == true) continue; // 중복 공격 방지
+
+            hitTargets.Add(damageable);
+            damageable.TakeDamage(damage);
+        }
+
+        return hitTargets.Count;
+    }
 }
