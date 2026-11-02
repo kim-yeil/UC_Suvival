@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour, IDamageable // interface IDamageable 탑재. 상속 X.
 {
     [SerializeField] private int maxHealth = 3;
-    private int currentHealth;
+    private int currentHealth;    
 
     public bool isDead;
     private Animator animator;

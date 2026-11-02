@@ -15,8 +15,6 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private EnemyCatalogSO enemyCatalog;
 
-    [SerializeField] private EnemyChaser[] enemyPrefab;
-
     [SerializeField] private Transform playerTransform;
     [SerializeField] private float spawnInterval = 2.0f;
 
@@ -62,6 +60,12 @@ public class EnemySpawner : MonoBehaviour
                 newEnemy.SetVelocity(spawnedEnemySpeed);
                 newEnemy.SetExpAmount(spawnedEnemyExpAmount);
                 newEnemy.SetEnemyHealth(spawnedEnemyHealth);
+            }
+
+            MiniBossBehaviour miniBoss = newEnemy.GetComponent<MiniBossBehaviour>();
+            if (miniBoss != null)
+            {
+                miniBoss.SetTarget(playerTransform);
             }
         }
     }

@@ -23,6 +23,8 @@ MonoBehaviour:
       weight: 0
     - enemyId: enemy_ranged
       weight: 0
+    - enemyId: enemy_miniboss
+      weight: 10
   - waveName: Wave2
     enemyWeights:
     - enemyId: enemy_normal
@@ -33,6 +35,8 @@ MonoBehaviour:
       weight: 0
     - enemyId: enemy_ranged
       weight: 0
+    - enemyId: enemy_miniboss
+      weight: 10
   - waveName: Wave3
     enemyWeights:
     - enemyId: enemy_normal
@@ -43,6 +47,8 @@ MonoBehaviour:
       weight: 1
     - enemyId: enemy_ranged
       weight: 0
+    - enemyId: enemy_miniboss
+      weight: 5
   - waveName: Wave4
     enemyWeights:
     - enemyId: enemy_normal
