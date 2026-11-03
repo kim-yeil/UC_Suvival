@@ -14,6 +14,8 @@ public abstract class WeaponBase : MonoBehaviour
 
     [SerializeField] private int succededCount = 0;
 
+    [SerializeField] private ProjectilePool projectilePool;
+
     protected void InitializeWeapon()
     {
         if (weaponData != null)
@@ -22,6 +24,9 @@ public abstract class WeaponBase : MonoBehaviour
             projectileSpeed = weaponData.projectileSpeed;
             attackInterval = weaponData.attackInterval;
         }
+
+        if (projectilePool != null && projectilePrefab != null) // 원거리 무기만 체크
+            projectilePool.Configure(projectilePrefab.gameObject);
     }
 
     protected WeaponDataSO GetWeaponData()
@@ -52,8 +57,13 @@ public abstract class WeaponBase : MonoBehaviour
             return false;
         }
 
-        ProjectileMovement projectileObject = Instantiate(projectilePrefab, 
-            projectileSpawnPoint.position, Quaternion.identity);
+        if (projectilePool == null) return false;
+
+        //ProjectileMovement projectileObject = Instantiate(projectilePrefab, 
+        //    projectileSpawnPoint.position, Quaternion.identity);
+
+        ProjectileMovement projectileObject
+            = projectilePool.Get(projectileSpawnPoint.position);
 
         if (projectileObject == null) return false;
         projectileObject.Initialized(direction, projectileSpeed);
