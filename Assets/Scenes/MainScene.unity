@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 228661368}
   - component: {fileID: 228661367}
   m_Layer: 0
-  m_Name: ProjectilePool
+  m_Name: ProjectilePoolNormal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -465,7 +465,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a442a054b92398c42bb056343a70209d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectilePool
-  initialSize: 30
+  initialSize: 10
+  maxSize: 30
 --- !u!4 &228661368
 Transform:
   m_ObjectHideFlags: 0
@@ -473,6 +474,52 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 228661366}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &361373087
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 361373089}
+  - component: {fileID: 361373088}
+  m_Layer: 0
+  m_Name: ProjectilePoolCross
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &361373088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361373087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a442a054b92398c42bb056343a70209d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectilePool
+  initialSize: 4
+  maxSize: 6
+--- !u!4 &361373089
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361373087}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -896,12 +943,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrossAutoAttack
   weaponData: {fileID: 11400000, guid: 0f3cf49d1c2d7ea40b93e660d757110b, type: 2}
-  projectilePrefab: {fileID: 836390279991871764, guid: a4603975b3b8c42408e3b459927d98d9, type: 3}
+  projectilePrefab: {fileID: 836390279991871764, guid: 58dc37cf5e02e3744b3de8bfe3957127, type: 3}
   projectileSpawnPoint: {fileID: 1428345510}
   projectileSpeed: 5
   attackInterval: 0.7
   succededCount: 0
-  projectilePool: {fileID: 228661367}
+  projectilePool: {fileID: 361373088}
 --- !u!1 &830493535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1794,6 +1841,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 1008803956}
   - {fileID: 810066446}
+  - {fileID: 1348849381}
   playerHealth: {fileID: 1348849375}
 --- !u!114 &1348849381
 MonoBehaviour:
@@ -3397,3 +3445,4 @@ SceneRoots:
   - {fileID: 1526025337}
   - {fileID: 2103639309}
   - {fileID: 228661368}
+  - {fileID: 361373089}

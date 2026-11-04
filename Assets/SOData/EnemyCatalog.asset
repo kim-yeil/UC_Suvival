@@ -32,7 +32,7 @@ MonoBehaviour:
     enemyPrefab: {fileID: 1954415435069277618, guid: 150cc8429da67994e83d6587ee953cfb, type: 3}
     enemySpeed: 0.5
     enemyEXP: 2
-    enemyHP: 3
+    enemyHP: 5
   - id: enemy_miniboss
     enemyPrefab: {fileID: 1954415435069277618, guid: 1a29ee190fa4bf34796ff3ee691bd81f, type: 3}
     enemySpeed: 0.5

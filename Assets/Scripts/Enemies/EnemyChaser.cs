@@ -73,7 +73,6 @@ public class EnemyChaser : MonoBehaviour
         }
         else body.linearVelocity = finalDirection * moveSpeed;
     }
-
     public void SetTarget(Transform targetTransform)
     {
         playerTransfomrm = targetTransform;

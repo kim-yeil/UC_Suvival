@@ -94,8 +94,9 @@ public class EnemySpawner : MonoBehaviour
 
                 spawnedEnemySpeed = enemyCatalog.FindEnemySpeed(entry.enemyId);
                 spawnedEnemyExpAmount = enemyCatalog.FindEnemyEXP(entry.enemyId);
-                spawnedEnemyHealth = enemyCatalog.FindEnemyHP(entry.enemyId);
+                spawnedEnemyHealth = enemyCatalog.FindEnemyHP(entry.enemyId);                
                 EnemyChaser enemyChaser = obj.GetComponent<EnemyChaser>();
+
                 return enemyChaser;
             }
         }

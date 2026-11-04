@@ -22,9 +22,9 @@ MonoBehaviour:
     - enemyId: enemy_heavy
       weight: 0
     - enemyId: enemy_ranged
-      weight: 0
+      weight: 15
     - enemyId: enemy_miniboss
-      weight: 10
+      weight: 0
   - waveName: Wave2
     enemyWeights:
     - enemyId: enemy_normal

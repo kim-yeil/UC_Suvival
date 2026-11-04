@@ -91,7 +91,8 @@ public abstract class WeaponBase : MonoBehaviour
     public void TryAttack()
     {
         if (CanAttack() != true) return;
-        if (Attack() == true) FinishAttack();
+        Attack();
+        FinishAttack();
     }
 
     // abstract : 상속 받는 클래스가 정의를 해야함
